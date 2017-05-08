@@ -23,9 +23,8 @@
 
 <script>
   import TreeStore from './model/tree-store'
-  import {t} from 'element-ui/src/locale'
-  import emitter from './model/emitter'
-  import dragula from './model/dragula'
+  import {t} from './model/locale'
+  import emitter from './model/mixins/emitter'
 
   export default {
     name: 'ElTree1',
@@ -191,10 +190,6 @@
       if (this.defaultFilter) {
         this.filter(this.defaultFilter[0])
       }
-    },
-
-    mounted() {
-      dragula([this.$refs.fuck])
     }
   };
 </script>
