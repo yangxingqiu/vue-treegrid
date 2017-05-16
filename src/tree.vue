@@ -25,6 +25,7 @@
   import TreeStore from './model/tree-store'
   import {t} from './model/locale'
   import emitter from './model/mixins/emitter'
+  import dragula from './model/dragula'
 
   export default {
     name: 'ElTree1',
@@ -190,6 +191,13 @@
       if (this.defaultFilter) {
         this.filter(this.defaultFilter[0])
       }
+    },
+    mounted () {
+      const drake = dragula([this.$refs.fuck], {createMirror (item) {
+          const mirror = document.createElement('table')
+          mirror.appendChild(item.cloneNode(true))
+          return mirror
+      }});
     }
   };
 </script>

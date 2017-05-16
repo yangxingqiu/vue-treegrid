@@ -70,6 +70,9 @@ export default class TreeStore {
   }
 
   getNode(data) {
+    if(data instanceof Node){
+      return data
+    }
     const key = typeof data !== 'object' ? data : getNodeKey(this.key, data);
     return this.nodesMap[key];
   }
@@ -88,6 +91,17 @@ export default class TreeStore {
     const node = this.getNode(data);
     if (node) {
       node.parent.removeChild(node);
+    }
+  }
+
+  move(data, parent) {
+    console.log('move arg: ', data, parent)
+    const node = this.getNode(data)
+    const pnode = this.getNode(parent)
+    console.log('move node: ', node, pnode)
+    if (node) {      
+      node.parent.removeChild(node, true)
+      pnode.insertChild(node)
     }
   }
 
@@ -133,6 +147,7 @@ export default class TreeStore {
 
     const nodeKey = node.key;
     if (nodeKey) this.nodesMap[node.key] = node;
+
   }
 
   deregisterNode(node) {
@@ -337,5 +352,8 @@ export default class TreeStore {
     }
 
     return allNodes
+  }
+  getData() {
+
   }
 };

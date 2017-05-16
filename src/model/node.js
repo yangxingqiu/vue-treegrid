@@ -180,9 +180,11 @@ export default class Node {
         store: this.store
       });
       child = new Node(child);
+    } else {
+      child.parent = this
     }
 
-    child.level = this.level + 1;
+    child.__LevelDepth(this.level + 1)
 
     if (typeof index === 'undefined' || index < 0) {
       this.childNodes.push(child);
@@ -210,11 +212,13 @@ export default class Node {
     this.insertChild(child, index);
   }
 
-  removeChild(child) {
+  removeChild(child, notDestroy) {
     const index = this.childNodes.indexOf(child);
 
     if (index > -1) {
-      this.store && this.store.deregisterNode(child);
+      if (!notDestroy) {
+        this.store && this.store.deregisterNode(child);
+      }    
       child.parent = null;
       this.childNodes.splice(index, 1);
     }
@@ -400,7 +404,15 @@ export default class Node {
         node.fatheExpanded = false
         node._setFatheExpanded(node,false)
       })
-    }
+    }   
+  }
+
+  __LevelDepth(level) {
+    this.level = level
+    this.childNodes.forEach(node => node.__LevelDepth(level + 1))
+  }
+
+  _getData() {
     
   }
 }
