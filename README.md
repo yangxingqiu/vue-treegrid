@@ -2,6 +2,10 @@
 
 > vue-treegrid
 
+## Demo
+
+[https://yangxingqiu.github.io/vue-treegrid-demo/index.html](https://yangxingqiu.github.io/vue-treegrid-demo/index.html)
+
 ## Build Setup
 
 ``` bash
